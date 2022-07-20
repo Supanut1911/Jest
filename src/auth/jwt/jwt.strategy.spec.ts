@@ -1,7 +1,7 @@
 import { JwtStrategy } from './jwt.strategy';
 import { Test } from '@nestjs/testing';
-import { UserRepository } from './user.repository';
-import { User } from './user.entity';
+import { UserRepository } from '../user.repository';
+import { User } from '../../entities/user.entity';
 import { UnauthorizedException } from '@nestjs/common';
 
 const mockUserRepository = () => ({
@@ -31,13 +31,17 @@ describe('JwtStrategy', () => {
 
       userRepository.findOne.mockResolvedValue(user);
       const result = await jwtStrategy.validate({ username: 'TestUser' });
-      expect(userRepository.findOne).toHaveBeenCalledWith({ username: 'TestUser' });
+      expect(userRepository.findOne).toHaveBeenCalledWith({
+        username: 'TestUser',
+      });
       expect(result).toEqual(user);
     });
 
     it('throws an unauthorized exception as user cannot be found', () => {
       userRepository.findOne.mockResolvedValue(null);
-      expect(jwtStrategy.validate({ username: 'TestUser' })).rejects.toThrow(UnauthorizedException);
+      expect(jwtStrategy.validate({ username: 'TestUser' })).rejects.toThrow(
+        UnauthorizedException,
+      );
     });
   });
 });

@@ -1,4 +1,4 @@
-import { User } from './user.entity';
+import { User } from '../entities/user.entity';
 import * as bcrypt from 'bcryptjs';
 
 describe('User entity', () => {
