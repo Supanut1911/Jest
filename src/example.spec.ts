@@ -8,7 +8,7 @@ class FriendsList {
   }
 
   announceFriendship(name) {
-    global.console.log(`${name} is now a friend!`);
+    // global.console.log(`${name} is now a friend!`);
   }
 
   removeFriend(name) {
@@ -56,7 +56,9 @@ describe('FriendsList', () => {
     });
 
     it('throws an error as friend does not exist', () => {
-      expect(() => friendsList.removeFriend('Ariel')).toThrow(new Error('Friend not found!'));
+      expect(() => friendsList.removeFriend('Ariel')).toThrow(
+        new Error('Friend not found!'),
+      );
     });
   });
 });
